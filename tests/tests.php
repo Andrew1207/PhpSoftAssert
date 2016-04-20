@@ -5,7 +5,7 @@ namespace tests;
 use softAssert\softAssert;
 require_once('../../php-soft-assert/softAssert/softAssert.php');
 
-class test extends softAssert
+class tests extends softAssert
 {
     public function tearDown()
     {
