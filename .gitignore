@@ -1,0 +1,10 @@
+/.idea/*
+packages/composer.*
+packages/vendor/*
+packages/node_modules/*
+packages/resource/documentation/*
+packages/resource/*.log
+EnvironmentConfig.php
+.phpunit-cas.db
+.DS_Store
+*.log
