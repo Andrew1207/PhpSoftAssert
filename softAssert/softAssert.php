@@ -1,7 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: andrewcraver
+ * Date: 4/20/16
+ * Time: 1:39 PM
+ */
 
 namespace softAssert;
 
+/**
+ * Class softAssert
+ * @package softAssert
+ */
 class softAssert extends \PHPUnit_Framework_TestCase
 {
     /**
