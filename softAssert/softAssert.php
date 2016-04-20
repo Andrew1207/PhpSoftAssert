@@ -2,7 +2,7 @@
 
 namespace softAssert;
 
-class TestUtility extends PHPUnit_Framework_TestCase
+class softAssert extends PHPUnit_Framework_TestCase
 {
     /**
      * soft assert property.
