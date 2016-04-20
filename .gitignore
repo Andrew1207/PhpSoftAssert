@@ -1,4 +1,5 @@
 /.idea/*
+/vendor/* 
 .phpunit-cas.db
 .DS_Store
 *.log
