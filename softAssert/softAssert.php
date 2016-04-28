@@ -206,12 +206,13 @@ class softAssert extends \PHPUnit_Framework_TestCase
 
     public function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
     {
-        $message = explode("\n", $e->getMessage());
+        $message = explode("\n",$e->getMessage());
         $trace = $e->getTraceAsString();
-        $end = strpos($trace, ': softAssert\softAssert->s');
-        $start = strrpos($trace, ' /Users/', -(strlen($trace) - $end));
-        $trace = substr($trace, $start, $end - $start);
-        array_push($this->m_errors, $message[0] . "\n" . $trace);
+        $start = strpos($trace,__FILE__);
+        $start = strpos($trace,' /',$start);
+        $end = strpos($trace,':',$start);
+        $trace = substr($trace,$start,$end-$start);
+        array_push($this->m_errors,$message[0]."\n".$trace);
     }
 
     /**
