@@ -204,7 +204,7 @@ class softAssert extends \PHPUnit_Framework_TestCase
      * @param \PHPUnit_Framework_AssertionFailedError $e
      */
 
-    public function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
+    private function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
     {
         $message = explode("\n",$e->getMessage());
         $trace = $e->getTraceAsString();
