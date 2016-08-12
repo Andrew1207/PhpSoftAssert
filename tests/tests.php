@@ -42,8 +42,8 @@ class tests extends softAssert
 
     public function testEqualsCustomMessage()
     {
-        $this->softAssert('assertEquals', 1, 2,'custom error message');
-        $this->softAssert('assertEquals', 2, 2,'custom error message');
+        $this->softAssert('assertEquals', 1, 2, 'custom error message');
+        $this->softAssert('assertEquals', 2, 2, 'custom error message');
     }
 
     /**
@@ -63,6 +63,6 @@ class tests extends softAssert
 
     public function testSuccess()
     {
-        $this->softAssert('assertStringEndsWith', 'ing', 'ending' , 'custom error message');
+        $this->softAssert('assertStringEndsWith', 'ing', 'ending', 'custom error message');
     }
 }
