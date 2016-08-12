@@ -15,211 +15,57 @@ namespace softAssert;
 class softAssert extends \PHPUnit_Framework_TestCase
 {
     /**
-     * soft assert property.
+     * soft assert error array.
      * @var array
      */
 
     private $m_errors = array();
 
     /**
-     * soft assert function.
-     * @param $expected
-     * @param $actual
-     * @param string $message
-     * @param float $delta
+     * general soft assert function.
+     * can be used for any assertion, takes variable args depending on assertion being called.
+     * example call: $this->softAssert('assertEquals', 1.1, 1.2, 'custom message', 0.1).
+     * @author acraver
+     * @param $assertion
+     * @param array ...$args
+     * @throws \Exception
      */
 
-    public function softAssertEquals($expected, $actual, $message = '', $delta = 0.0)
+    protected function softAssert($assertion, ...$args)
     {
-        try {
-            $this->assertEquals($expected, $actual, $message, $delta);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
+        if (method_exists('PHPUnit_Framework_Assert', $assertion)) {
+            try {
+                \PHPUnit_Framework_Assert::$assertion(...$args);
+            } catch (\PHPUnit_Framework_AssertionFailedError $e) {
+                $this->formatPushSoftAssertError($e);
+            }
+        } else {
+            throw new \Exception("$assertion is not a valid assertion!");
         }
     }
 
     /**
-     * soft assert function.
-     * @param $expected
-     * @param $actual
-     * @param string $message
-     */
-
-    public function softAssertNotEquals($expected, $actual, $message = '')
-    {
-        try {
-            $this->assertNotEquals($expected, $actual, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $condition
-     * @param string $message
-     */
-
-    public function softAssertTrue($condition, $message = '')
-    {
-        try {
-            $this->assertTrue($condition, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $needle
-     * @param $haystack
-     * @param string $message
-     * @param bool|false $ignoreCase
-     */
-
-    public function softAssertContains($needle, $haystack, $message = '', $ignoreCase = false)
-    {
-        try {
-            $this->assertContains($needle, $haystack, $message, $ignoreCase);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $needle
-     * @param $haystack
-     * @param string $message
-     * @param bool|false $ignoreCase
-     */
-
-    public function softAssertNotContains($needle, $haystack, $message = '', $ignoreCase = false)
-    {
-        try {
-            $this->assertNotContains($needle, $haystack, $message, $ignoreCase);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $subset
-     * @param $array
-     * @param string $message
-     */
-
-    public function softAssertArraySubset($subset, $array, $message = '')
-    {
-        try {
-            $this->assertArraySubset($subset, $array, false, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $filename
-     * @param string $message
-     */
-
-    public function softAssertFileExists($filename, $message = '')
-    {
-        try {
-            $this->assertFileExists($filename, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $expected
-     * @param $actual
-     * @param string $message
-     */
-
-    public function softAssertGreaterThan($expected, $actual, $message = '')
-    {
-        try {
-            $this->assertGreaterThan($expected, $actual, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $suffix
-     * @param $string
-     * @param string $message
-     */
-
-    public function softAssertStringEndsWith($suffix, $string, $message = '')
-    {
-        try {
-            $this->assertStringEndsWith($suffix, $string, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $prefix
-     * @param $string
-     * @param string $message
-     */
-
-    public function softAssertStringStartsWith($prefix, $string, $message = '')
-    {
-        try {
-            $this->assertStringStartsWith($prefix, $string, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
-     * @param $format
-     * @param $string
-     * @param string $message
-     */
-
-    public function softAssertStringMatchesFormat($format, $string, $message = '')
-    {
-        try {
-            $this->assertStringMatchesFormat($format, $string, $message);
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            $this->formatPushSoftAssertError($e);
-        }
-    }
-
-    /**
-     * soft assert function.
      * formats the error by taking message and stack trace and pushing to error array
      * @param \PHPUnit_Framework_AssertionFailedError $e
      */
 
     private function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
     {
-        $message = explode("\n", $e->getMessage());
+        $message = rtrim($e->getMessage(), "\n");
         $trace = $e->getTraceAsString();
         $start = strpos($trace, __FILE__);
         $start = strpos($trace, ' /', $start);
         $end = strpos($trace, ':', $start);
         $trace = substr($trace, $start, $end-$start);
-        $this->m_errors[] = $message[0] . "\n" . $trace;
+        $this->m_errors[] = $message . "\n" . $trace;
     }
 
     /**
-     * soft assert function.
+     * throws exception with all failures if they exist.
+     * call this function at end of test.
      */
 
-    public function softAssertAll()
+    protected function softAssertAll()
     {
         if (!empty($this->m_errors)) {
             $i = 1;
@@ -231,5 +77,4 @@ class softAssert extends \PHPUnit_Framework_TestCase
             throw new \PHPUnit_Framework_AssertionFailedError("Test FAILED\n\n$errorsString");
         }
     }
-
 }

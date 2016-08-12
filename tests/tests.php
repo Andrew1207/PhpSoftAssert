@@ -9,7 +9,7 @@
 namespace tests;
 
 use softAssert\softAssert;
-require_once('../../php-soft-assert/softAssert/softAssert.php');
+require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
 
 /**
  * Class tests
@@ -32,8 +32,8 @@ class tests extends softAssert
 
     public function testGreaterThanDefaultMessage()
     {
-        $this->softAssertGreaterThan(2,1);
-        $this->softAssertGreaterThan(1,2);
+        $this->softAssert('assertGreaterThan', 2, 1);
+        $this->softAssert('assertGreaterThan', 1, 2);
     }
 
     /**
@@ -42,8 +42,8 @@ class tests extends softAssert
 
     public function testEqualsCustomMessage()
     {
-        $this->softAssertEquals(1,2,"custom error message");
-        $this->softAssertEquals(2,2,"custom error message");
+        $this->softAssert('assertEquals', 1, 2,'custom error message');
+        $this->softAssert('assertEquals', 2, 2,'custom error message');
     }
 
     /**
@@ -52,9 +52,9 @@ class tests extends softAssert
 
     public function testMultipleFailures()
     {
-        $this->softAssertNotEquals(2,2,"custom error message");
-        $this->softAssertStringStartsWith("asdf","fdas");
-        $this->softAssertTrue(false);
+        $this->softAssert('assertNotEquals', 2, 2, 'custom error message');
+        $this->softAssert('assertStringStartsWith', 'asdf', 'fdas');
+        $this->softAssert('assertTrue', false);
     }
 
     /**
@@ -63,6 +63,6 @@ class tests extends softAssert
 
     public function testSuccess()
     {
-        $this->softAssertStringEndsWith("ing","ending","custom error message");
+        $this->softAssert('assertStringEndsWith', 'ing', 'ending' , 'custom error message');
     }
 }
