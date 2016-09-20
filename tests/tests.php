@@ -18,36 +18,36 @@ require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
 class tests extends softAssert
 {
     /**
-     * tearDown function.
-     */
-
-    public function tearDown()
-    {
-        $this->softAssertAll();
-    }
-
-    /**
      * test function.
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
 
     public function testGreaterThanDefaultMessage()
     {
         $this->softAssert('assertGreaterThan', 2, 1);
         $this->softAssert('assertGreaterThan', 1, 2);
+
+        print_r($this->softAssertErrors);
+        $this->softAssertAll();
     }
 
     /**
      * test function.
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
 
     public function testEqualsCustomMessage()
     {
         $this->softAssert('assertEquals', 1, 2, 'custom error message');
         $this->softAssert('assertEquals', 2, 2, 'custom error message');
+
+        print_r($this->softAssertErrors);
+        $this->softAssertAll();
     }
 
     /**
      * test function.
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
 
     public function testMultipleFailures()
@@ -55,6 +55,9 @@ class tests extends softAssert
         $this->softAssert('assertNotEquals', 2, 2, 'custom error message');
         $this->softAssert('assertStringStartsWith', 'asdf', 'fdas');
         $this->softAssert('assertTrue', false);
+
+        print_r($this->softAssertErrors);
+        $this->softAssertAll();
     }
 
     /**

@@ -19,7 +19,7 @@ class softAssert extends \PHPUnit_Framework_TestCase
      * @var array
      */
 
-    private $m_errors = array();
+    protected $softAssertErrors = array();
 
     /**
      * general soft assert function.
@@ -57,7 +57,7 @@ class softAssert extends \PHPUnit_Framework_TestCase
         $start = strpos($trace, ' /', $start);
         $end = strpos($trace, ':', $start);
         $trace = substr($trace, $start, $end-$start);
-        $this->m_errors[] = $message . "\n" . $trace;
+        $this->softAssertErrors[] = $message . "\n" . $trace;
     }
 
     /**
@@ -67,10 +67,10 @@ class softAssert extends \PHPUnit_Framework_TestCase
 
     protected function softAssertAll()
     {
-        if (!empty($this->m_errors)) {
+        if (!empty($this->softAssertErrors)) {
             $i = 1;
             $errorsString = "The following asserts failed:\n\n";
-            foreach ($this->m_errors as $err) {
+            foreach ($this->softAssertErrors as $err) {
                 $errorsString .= "$i) $err\n\n";
                 $i++;
             }
