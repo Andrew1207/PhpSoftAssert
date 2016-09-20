@@ -4,7 +4,7 @@
 - Calling softAssertAll() at end of test will cause an exception to be thrown if at least one soft assertion failed.  All failed assertions will be listed with the message and stack trace line where failure occurred.
 - Usage examples can be found in tests.php.
 
-######################################################################################################################
+
 
 Example 1:
 
@@ -21,7 +21,7 @@ The following asserts failed:
 1) Failed asserting that 1 is greater than 2.
  /path/to/test.php(<line #>)
 
-######################################################################################################################
+
 
 Example 2:
  
