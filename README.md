@@ -6,7 +6,7 @@
 
 
 
-Example 1:
+#Example 1:
 
 $this->softAssert('assertGreaterThan', 2, 1);
 $this->softAssert('assertGreaterThan', 1, 2);
@@ -23,7 +23,7 @@ The following asserts failed:
 
 
 
-Example 2:
+#Example 2:
  
 $this->softAssert('assertNotEquals', 2, 2, 'custom error message');
 $this->softAssert('assertStringStartsWith', 'asdf', 'fdas');
