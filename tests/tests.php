@@ -19,7 +19,7 @@ require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
 class tests extends \PHPUnit_Framework_TestCase
 {
     /**
-     * softassert property.
+     * soft assert property.
      * @var SoftAssert
      */
     private $softAssert;

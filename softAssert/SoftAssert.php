@@ -23,7 +23,7 @@ class SoftAssert
     /**
      * general soft assert function.
      * can be used for any assertion, takes variable args depending on assertion being called.
-     * example call: $this->softAssert('assertEquals', 1.1, 1.2, 'custom message', 0.1).
+     * example call: $this->assert('assertEquals', 1.1, 1.2, 'custom message', 0.1).
      * @author acraver
      * @param $assertion
      * @param array ...$args
