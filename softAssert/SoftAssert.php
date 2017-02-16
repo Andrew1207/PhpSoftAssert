@@ -24,7 +24,6 @@ class SoftAssert
      * general soft assert function.
      * can be used for any assertion, takes variable args depending on assertion being called.
      * example call: $this->assert('assertEquals', 1.1, 1.2, 'custom message', 0.1).
-     * @author acraver
      * @param $assertion
      * @param array ...$args
      * @throws \Exception
@@ -43,7 +42,7 @@ class SoftAssert
     }
 
     /**
-     * formats the error by taking message and stack trace and pushing to error array
+     * formats the error by taking message and stack trace and pushing to error array.
      * @param \PHPUnit_Framework_AssertionFailedError $e
      */
     private function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
