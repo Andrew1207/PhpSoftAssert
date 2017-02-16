@@ -8,64 +8,74 @@
 
 namespace tests;
 
-use softAssert\softAssert;
+use softAssert\SoftAssert;
+
 require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
 
 /**
  * Class tests
  * @package tests
  */
-class tests extends softAssert
+class tests extends \PHPUnit_Framework_TestCase
 {
     /**
+     * softassert property.
+     * @var SoftAssert
+     */
+    private $softAssert;
+
+    /**
+     * setup function.
+     */
+    public function setUp()
+    {
+        $this->softAssert = new SoftAssert();
+    }
+
+    /**
      * test function.
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
-
     public function testGreaterThanDefaultMessage()
     {
-        $this->softAssert('assertGreaterThan', 2, 1);
-        $this->softAssert('assertGreaterThan', 1, 2);
+        $this->softAssert->assert('assertGreaterThan', 2, 1);
+        $this->softAssert->assert('assertGreaterThan', 1, 2);
 
-        print_r($this->softAssertErrors);
-        $this->softAssertAll();
+        $this->softAssert->assertAll();
     }
 
     /**
      * test function.
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
-
     public function testEqualsCustomMessage()
     {
-        $this->softAssert('assertEquals', 1, 2, 'custom error message');
-        $this->softAssert('assertEquals', 2, 2, 'custom error message');
+        $this->softAssert->assert('assertEquals', 1, 2, 'custom error message');
+        $this->softAssert->assert('assertEquals', 2, 2, 'custom error message');
 
-        print_r($this->softAssertErrors);
-        $this->softAssertAll();
+        $this->softAssert->assertAll();
     }
 
     /**
      * test function.
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
-
     public function testMultipleFailures()
     {
-        $this->softAssert('assertNotEquals', 2, 2, 'custom error message');
-        $this->softAssert('assertStringStartsWith', 'asdf', 'fdas');
-        $this->softAssert('assertTrue', false);
+        $this->softAssert->assert('assertNotEquals', 2, 2, 'custom error message');
+        $this->softAssert->assert('assertStringStartsWith', 'asdf', 'fdas');
+        $this->softAssert->assert('assertTrue', false);
 
-        print_r($this->softAssertErrors);
-        $this->softAssertAll();
+        $this->softAssert->assertAll();
     }
 
     /**
      * test function.
      */
-
     public function testSuccess()
     {
-        $this->softAssert('assertStringEndsWith', 'ing', 'ending', 'custom error message');
+        $this->softAssert->assert('assertStringEndsWith', 'ing', 'ending', 'custom error message');
+
+        $this->softAssert->assertAll();
     }
 }

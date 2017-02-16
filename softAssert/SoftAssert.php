@@ -9,17 +9,16 @@
 namespace softAssert;
 
 /**
- * Class softAssert
+ * Class SoftAssert
  * @package softAssert
  */
-class softAssert extends \PHPUnit_Framework_TestCase
+class SoftAssert
 {
     /**
      * soft assert error array.
      * @var array
      */
-
-    protected $softAssertErrors = array();
+    private $softAssertErrors = array();
 
     /**
      * general soft assert function.
@@ -30,8 +29,7 @@ class softAssert extends \PHPUnit_Framework_TestCase
      * @param array ...$args
      * @throws \Exception
      */
-
-    protected function softAssert($assertion, ...$args)
+    public function assert($assertion, ...$args)
     {
         if (method_exists('PHPUnit_Framework_Assert', $assertion)) {
             try {
@@ -48,7 +46,6 @@ class softAssert extends \PHPUnit_Framework_TestCase
      * formats the error by taking message and stack trace and pushing to error array
      * @param \PHPUnit_Framework_AssertionFailedError $e
      */
-
     private function formatPushSoftAssertError(\PHPUnit_Framework_AssertionFailedError $e)
     {
         $message = rtrim($e->getMessage(), "\n");
@@ -64,8 +61,7 @@ class softAssert extends \PHPUnit_Framework_TestCase
      * throws exception with all failures if they exist.
      * call this function at end of test.
      */
-
-    protected function softAssertAll()
+    public function assertAll()
     {
         if (!empty($this->softAssertErrors)) {
             $i = 1;

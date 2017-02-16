@@ -8,11 +8,13 @@
 
 #Example 1:
 
-$this->softAssert('assertGreaterThan', 2, 1);
+$softAssert = new SoftAssert();
 <br>
-$this->softAssert('assertGreaterThan', 1, 2);
+$softAssert->assert('assertGreaterThan', 2, 1);
 <br>
-$this->softAssertAll();
+$softAssert->assert('assertGreaterThan', 1, 2);
+<br>
+$softAssert->assertAll();
 <br>
 <br>
 <br>
@@ -29,14 +31,16 @@ The following asserts failed:
 
 
 #Example 2:
- 
-$this->softAssert('assertNotEquals', 2, 2, 'custom error message');
+
+$softAssert = new SoftAssert();
 <br>
-$this->softAssert('assertStringStartsWith', 'asdf', 'fdas');
+$softAssert->assert('assertNotEquals', 2, 2, 'custom error message');
 <br>
-$this->softAssert('assertTrue', false);
+$softAssert->assert('assertStringStartsWith', 'asdf', 'fdas');
 <br>
-$this->softAssertAll();
+$softAssert->assert('assertTrue', false);
+<br>
+$softAssert->assertAll();
 <br>
 <br>
 <br>
