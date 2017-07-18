@@ -8,6 +8,7 @@
 
 namespace tests;
 
+use PHPUnit\Framework\TestCase;
 use softAssert\SoftAssert;
 
 require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
@@ -16,7 +17,7 @@ require_once dirname(__DIR__ ) . '/softAssert/softAssert.php';
  * Class tests
  * @package tests
  */
-class tests extends \PHPUnit_Framework_TestCase
+class tests extends TestCase
 {
     /**
      * soft assert property.
@@ -34,7 +35,7 @@ class tests extends \PHPUnit_Framework_TestCase
 
     /**
      * test function.
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testGreaterThanDefaultMessage()
     {
@@ -46,7 +47,7 @@ class tests extends \PHPUnit_Framework_TestCase
 
     /**
      * test function.
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testEqualsCustomMessage()
     {
@@ -58,7 +59,7 @@ class tests extends \PHPUnit_Framework_TestCase
 
     /**
      * test function.
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testMultipleFailures()
     {
